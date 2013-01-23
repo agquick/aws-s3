@@ -37,6 +37,14 @@ module AWS
       def raise
         Kernel.raise exception.new(message, response)
       end
+
+      def message
+        if error.has_key?('message')
+          return error['message']
+        else
+          return error.inspect.to_s
+        end
+      end
       
       private
         attr_reader :error, :exception, :container
